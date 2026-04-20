@@ -2,12 +2,10 @@ import os
 import subprocess
 import time
 
-
-
 #============================================= DEF'S OPÇÃO 1 =================================================================#"
 
 def Syu():
-    barra(); print("\033[38;5;208m             ----- Updating System -----  \033[0m"); barra(); time.sleep(0.4)
+    bar(); print("\033[38;5;208m             ----- Updating System -----  \033[0m"); bar(); time.sleep(0.4)
     comandos = [
     ("yay", ["yay", "-Syu"]),
     ("flatpak", ["flatpak", "update", "-y"]),
@@ -23,12 +21,8 @@ def Syu():
         except subprocess.CalledProcessError:
             print(f"[erro] {nome}")
 
-
-
 #============================================= DEF'S OPÇÃO 2 =================================================================#"
-
 def speedtest_cli():
-    audio_dangan_foward()
     print("\n\033[1;32mChecking speedtest-cli Instalation...\033[0m")
     subprocess.run("pacman -Qq speedtest-cli >/dev/null || sudo pacman -S --noconfirm speedtest-cli", shell=True)
     print("\033[1;32m Inicializing Speedtest...\n\033[0m")
@@ -36,14 +30,12 @@ def speedtest_cli():
     confirmation()
 
 def restart_network():
-    audio_dangan_foward()
     print("\n\033[1;32mRestarting Network Manager...\033[0m")
     subprocess.run(["sudo", "systemctl", "restart", "NetworkManager"])
     print("\n\033[1;32mWifi conection restarted.\033[0m")
     confirmation()
 
 def ip_info():
-    audio_dangan_foward()
     print("\n\033[1;38;5;120m--- IP INFO ---\033[0m")
     try:
         ip = subprocess.check_output(
@@ -55,10 +47,7 @@ def ip_info():
         print("Local IP: Unable to get it.")
     confirmation()
 #============================================= DEF'S OPÇÃO 3 =================================================================#"
-
-
 def download_utilitaries():
-    audio_dangan_foward();
     comando = '''
     sudo pacman -S --needed yay python xorg-server curl speedtest-cli libreoffice-fresh git python-pip python thunderbird kitty nemo vlc flatpak zip fuse2 &&
 
@@ -74,7 +63,6 @@ def download_utilitaries():
         print("Error Durring Instalation.")
 
 def download_gaming():
-    audio_dangan_foward();
     comando = '''
     sudo pacman -S --needed steam mangohud gamemode prismlauncher
     '''
@@ -84,7 +72,6 @@ def download_gaming():
         print("Cucumber")
 
 def download_worktools():
-    audio_dangan_foward()
     comando = '''
     sudo pacman -S --needed yay python nmap wget python-pip krita neofetch obs-studio vim vesktop pycharm-community-edition virtualbox virtualbox-host-modules-arch &&
 
@@ -120,9 +107,9 @@ def show_packages():
 #============================================= DEF'S OPÇÃO 4 =================================================================#"
 
 def list_components():
-    clear_console();      audio_components();   barra();                print("\033[1;38;5;208m                  --- COMPONENTS ---                          \033[0m");  barra()
+    clear_console();   bar();                print("\033[1;38;5;208m                  --- COMPONENTS ---                          \033[0m");  bar()
     time_start= time.time();    os.system("inxi -F");   time_end=time.time();
-    barra();print(f"\033[1;93mElapsed time: {time_start - time_end:.4f}\033[0m");barra();confirmation()
+    bar();print(f"\033[1;93mElapsed time: {time_start - time_end:.4f}\033[0m");bar();confirmation()
 
 #============================================= DEF'S OPÇÃO 5 =================================================================#"
 
@@ -132,24 +119,21 @@ def power_menu():
 
 
     if opc == "1":
-        audio_fastfetch_down();opc = input("      \033[31mAre you sure \033[32m(y/n)\033[31m: \033[0m")
+        opc = input("      \033[31mAre you sure \033[32m(y/n)\033[31m: \033[0m")
         if opc == "y":
             os.system("shutdown now")
         else:
-            clear_console(); audio_dangan_foward_2();print("\033[1;32mReturning...\033[0m");time.sleep(0.7)
+            clear_console();print("\033[1;32mReturning...\033[0m");time.sleep(0.7)
     elif opc == "2":
-        audio_fastfetch_down(); opc = input("      \033[31mAre you sure \033[32m(y/n)\033[31m: \033[0m")
+        opc = input("      \033[31mAre you sure \033[32m(y/n)\033[31m: \033[0m")
         if opc == "y":
             os.system("reboot")
         else:
-            clear_console(); audio_dangan_foward_2();print("\033[1;32mReturning...\033[0m");time.sleep(0.7)
+            clear_console();print("\033[1;32mReturning...\033[0m");time.sleep(0.7)
     elif opc == "3":
-            audio_dangan_foward_2();os.system("systemctl suspend")
+            os.system("systemctl suspend")
     else:
-        audio_dangan_back();print("\033[1;32mReturning...\033[0m");time.sleep(0.7)
-
-
-
+        print("\033[1;32mReturning...\033[0m");time.sleep(0.7)
 
 
 #============================================= DEF'S OPÇÃO 6 =================================================================#"
@@ -213,7 +197,6 @@ def configure_kitty(destino=None):
         print(f"Error: {e}")
 
 def open_kitty_conf():
-    audio_dangan_foward_2()
     caminho = os.path.expanduser("~/.config/kitty/kitty.conf")
     subprocess.Popen(["kate", caminho])
 
@@ -237,7 +220,6 @@ def create_fastfetch():
         f.write(conteudo)
 
 def configure_ascii():
-    audio_dangan_foward_2()
     os.system("xdg-open ~/.config/fastfetch/ascii.txt")
 
 def create_new_ascii():
@@ -270,10 +252,10 @@ def create_new_ascii():
 
 #============================================= Menu's Print's =================================================================#"
 
-# ---- MENU PRINCIPAL:
+# ---- Main Menu Print:
 def main_menu_print():
-    clear_console()
-    print(f"\033[1;38;5;208m  ----< {time.strftime('%H:%M')} >----< Pinalto's CachyOS Manager >-------\033[0m"); barra()
+    clear_console();bar()
+    print(f"\033[1;38;5;208m  ----< {time.strftime('%H:%M')} >----< Pinalto's CachyOS Manager >-------\033[0m"); bar()
     print("\033[1m |  \033[38;5;208m1 ➜\033[0m \033[1;36mComplete System Update\033[0m                          |\033[0m")
     print("\033[1m |                                                      |\033[0m")
     print("\033[1m |  \033[38;5;208m2 ➜\033[0m \033[1;36mNetwork Tools\033[0m                          |\033[0m")
@@ -291,23 +273,23 @@ def main_menu_print():
     print("\033[1m |  \033[38;5;208m8 ➜\033[0m \033[1;36mFastFetch Options\033[0m                               |\033[0m")
     print("\033[1m |                                                      |\033[0m")
     print("\033[1m |  \033[38;5;208m0 ➜\033[0m \033[1;31mQuit\033[0m                                            |\033[0m")
-    barra()
+    bar()
 
 def opc2_menu_print():
     clear_console()
-    print(f"\033[1;38;5;208m                 Configuration Menu...\033[0m"); barra()
+    print(f"\033[1;38;5;208m                 Configuration Menu...\033[0m"); bar()
     print("\033[1m |  \033[38;5;208m1 ➜\033[0m \033[1;36mNetwork Speedtest\033[0m                               |\033[0m")
     print("\033[1m |                                                      |\033[0m")
     print("\033[1m |  \033[38;5;208m2 ➜\033[0m \033[1;36mRestart Wifi Network\033[0m                            |\033[0m")
     print("\033[1m |                                                      |\033[0m")
     print("\033[1m |  \033[38;5;208m3 ➜\033[0m \033[1;36mShow Local IP\033[0m                                   |\033[0m")
     print("\033[1m |                                                      |\033[0m")
-    print("\033[1m |  \033[38;5;208m0 ➜\033[0m \033[1;31mLeave\033[0m                                           |\033[0m");   barra()
+    print("\033[1m |  \033[38;5;208m0 ➜\033[0m \033[1;31mLeave\033[0m                                           |\033[0m");   bar()
 
 
 def opc3_menu_print():
     clear_console()
-    print(f"\033[1;38;5;208m                 Setup Menu...\033[0m"); barra()
+    print(f"\033[1;38;5;208m                 Setup Menu...\033[0m"); bar()
     print("\033[1m |  \033[38;5;208m1 ➜\033[0m \033[1;36mDownload Utilitaries Packages\033[0m                   |\033[0m")
     print("\033[1m |                                                      |\033[0m")
     print("\033[1m |  \033[38;5;208m2 ➜\033[0m \033[1;36mDownload Gaming Packages\033[0m                        |\033[0m")
@@ -317,10 +299,10 @@ def opc3_menu_print():
     print("\033[1m |  \033[38;5;208m4 ➜\033[0m \033[1;36mPackages Info:\033[0m                                  |\033[0m")
     print("\033[1m |                                                      |\033[0m")
     print("\033[1m |  \033[38;5;208m0 ➜\033[0m \033[1;31mLeave\033[0m                                           |\033[0m")
-    barra()
+    bar()
 
 def opc5_menu_print():
-    audio_dangan_foward(); print("\033[38;5;208m             ----- Power Options -----  \033[0m"); barra()
+    print("\033[38;5;208m             ----- Power Options -----  \033[0m"); bar()
     print(" |  \033[1;38;5;208m1 ➜\033[0m \033[1;36mPower Off\033[0m                                       |")
     print(" |                                                      |")
     print(" |  \033[1;38;5;208m2 ➜\033[0m \033[1;36mReboot\033[0m                                          |")
@@ -328,11 +310,11 @@ def opc5_menu_print():
     print(" |  \033[1;38;5;208m3 ➜\033[0m \033[1;36mSuspend\033[0m                                         |")
     print(" |                                                      |")
     print(" |  \033[1;38;5;208m0 ➜\033[0m \033[1;31mLeave\033[0m                                           |")
-    barra()
+    bar()
 
 def opc7_menu_print():
-    clear_console();audio_dangan_foward()
-    print(f"\033[1;38;5;208m                 Terminal Menu...\033[0m"); barra()
+    clear_console();
+    print(f"\033[1;38;5;208m                 Terminal Menu...\033[0m"); bar()
     print("\033[1m |  \033[38;5;208m1 ➜\033[0m \033[1;36mOpen Fish Terminal.conf\033[0m                         |\033[0m")
     print("\033[1m |                                                      |\033[0m")
     print("\033[1m |  \033[38;5;208m2 ➜\033[0m \033[1;36mSetup Custom Fish Terminal Config\033[0m               |\033[0m")
@@ -344,11 +326,11 @@ def opc7_menu_print():
     print("\033[1m |  \033[38;5;208m5 ➜\033[0m \033[1;36mKitty Themes\033[0m                                    |\033[0m")
     print("\033[1m |                                                      |\033[0m")
     print("\033[1m |  \033[38;5;208m0 ➜\033[0m \033[1;31mLeave\033[0m                                           |\033[0m")
-    barra()
+    bar()
 
 def opc8_menu_print():
     clear_console()
-    print(f"\033[1;38;5;208m                 FastFetch Menu...\033[0m"); barra()
+    print(f"\033[1;38;5;208m                 FastFetch Menu...\033[0m"); bar()
     print("\033[1m |  \033[38;5;208m1 ➜\033[0m \033[1;36mFastFetch\033[0m                                       |\033[0m")
     print("\033[1m |                                                      |\033[0m")
     print("\033[1m |  \033[38;5;208m2 ➜\033[0m \033[1;36mOpen FastFetch Ascii.txt\033[0m                        |\033[0m")
@@ -360,79 +342,12 @@ def opc8_menu_print():
     print("\033[1m |  \033[38;5;208m5 ➜\033[0m \033[1;36mSetup Fastfetch json\033[0m                            |\033[0m")
     print("\033[1m |                                                      |\033[0m")
     print("\033[1m |  \033[38;5;208m0 ➜\033[0m \033[1;31mLeave\033[0m                                           |\033[0m")
-    barra()
-
-
-#============================================= SONS UI  ============================================================================
-#    AVANÇAR
-def audio_dangan_foward():
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    caminho_audio = os.path.join(base_dir, "Assets", "Sounds", "audio_dangan_foward.flac")
-    os.system(f'ffplay -nodisp -autoexit -loglevel quiet -af "volume=0.2" "{caminho_audio}" > /dev/null 2>&1 &')
-def audio_dangan_foward_2():
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    caminho_audio = os.path.join(base_dir, "Assets", "Sounds", "audio_dangan_foward_2.wav")
-    os.system(f'ffplay -nodisp -autoexit -loglevel quiet -af "volume=0.2" "{caminho_audio}" > /dev/null 2>&1 &')
-def audio_dangan_back():
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    caminho_audio = os.path.join(base_dir, "Assets", "Sounds", "audio_dangan_back.flac")
-    os.system(f'ffplay -nodisp -autoexit -loglevel quiet -af "volume=0.2" "{caminho_audio}" > /dev/null 2>&1 &')
-
-#    FASTFETCH SFX
-def audio_fastfetch_up():
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    caminho_audio = os.path.join(base_dir, "Assets", "Sounds", "fastfetch_up.flac.mp3")
-    os.system(f'ffplay -nodisp -autoexit -loglevel quiet "{caminho_audio}" > /dev/null 2>&1 &')
-def audio_fastfetch_down():
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    caminho_audio = os.path.join(base_dir, "Assets", "Sounds", "fastfetch_out.mp3")
-    os.system(f'ffplay -nodisp -autoexit -loglevel quiet "{caminho_audio}" > /dev/null 2>&1 &')
-
-#    MENU IN/OUT SFX
-def audio_main_menu_leave():
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    caminho_audio = os.path.join(base_dir, "Assets", "Sounds", "audio_main_menu_leave.wav")
-    os.system(f'ffplay -nodisp -autoexit -loglevel quiet -af "volume=0.05" "{caminho_audio}" > /dev/null 2>&1 &')
-def audio_main_menu_leave_2():
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    caminho_audio = os.path.join(base_dir, "Assets", "Sounds", "audio_main_menu_leave_2.mp3")
-    os.system(f'ffplay -nodisp -autoexit -loglevel quiet -af "volume=0.3" "{caminho_audio}" > /dev/null 2>&1 &')
-def audio_main_menu_enter():
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    audio1 = os.path.join(base_dir, "Assets", "Sounds", "audio_main_Menu_open_1.wav")
-    audio2 = os.path.join(base_dir, "Assets", "Sounds", "audio_main_menu_open_2.wav")
-    os.system(f'ffplay -nodisp -autoexit -loglevel quiet -af "volume=0.2" "{audio1}" > /dev/null 2>&1 &')
-    time.sleep(0.2)
-    os.system(f'ffplay -nodisp -autoexit -loglevel quiet -af "volume=0.2" "{audio2}" > /dev/null 2>&1 &')
-
-#    COMPONENTS LISTING
-def audio_components():
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    audio1 = os.path.join(base_dir, "Assets", "Sounds", "audio_components_1.wav")
-    audio2 = os.path.join(base_dir, "Assets", "Sounds", "audio_components_2.mp3")
-    os.system(f'ffplay -nodisp -autoexit -loglevel quiet -af "volume=0.4" "{audio1}" > /dev/null 2>&1 &')
-    os.system(f'ffplay -nodisp -autoexit -loglevel quiet -af "volume=0.2" "{audio2}" > /dev/null 2>&1 &')
-
-
-
-
-
-
-
-
+    bar()
 
 
 #=============================================  Developer Menu  ===================================================================
-
-
-
-
-
 def developer_menu():
     clear_console();      print(time.strftime("%H:%M"))
-    print(f"==Developer Test Menu=====\n1 - audio_dangan_foward: \n2 - Audio_Dangan_Back:\n3 - Audio_Dangan_Foward_2:\n4 - Audio_Fastfetch_Down:\n5 - Audio_Fastfetch_up:\n6 - Audio_Main_Menu_Enter:\n7 - audio_main_menu_leave:\n8 - Components sqnc:\n9 - main_menu_leave_2")
-
-
     print("\033[31mTexto vermelho\033[0m")
     print("\033[32mTexto verde\033[0m")
     print("\033[1;34mAzul negrito\033[0m")
@@ -457,46 +372,16 @@ def developer_menu():
     print("\033[1;38;5;201mRosa\033[0m")
     while True:
         opc = input("\033[38;5;208mOption: \033[0m")
-        if opc == "1":
-            audio_dangan_foward()
-        elif opc == "2":
-            audio_dangan_back()
-        elif opc == "3":
-            audio_dangan_foward_2()
-        elif opc == "4":
-            audio_fastfetch_up()
-        elif opc == "5":
-            audio_fastfetch_down()
-        elif opc == "6":
-            audio_main_menu_enter()
-        elif opc == "7":
-            audio_main_menu_leave()
-        elif opc == "8":
-            audio_components()
-        elif opc == "9":
-            audio_main_menu_leave_2()
+        if opc == 1:
+            print("11111")
         else:
-            print("Saindo")
+            print("Leaving")
             time.sleep(0.2)
             break
 
+#============================================= Little DEF's ======================================================================
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-#============================================= PEQUENAS DEF's ======================================================================
-
-def barra():
+def bar():
     print("\033[1m#========================================================#\033[0m")
 
 def clear_console():
@@ -507,27 +392,15 @@ def fastfetch():
 
 def confirmation():
     resposta = input("     \033[32mcontinue...\033[0m")
-    audio_dangan_back()
 
 def confirmation_power():
     return input("\033[31mAre you sure \033[32m(y/n)\033[31m: \033[0m").lower() == "y"
 
 def leave_menu():
-    audio_dangan_back();          print("\033[31mLeaving...\033[0m")
+    print("\033[31mLeaving...\033[0m")
 
 def all_done():
-    audio_dangan_foward_2();    print("\033[32mAll Done!\033[0m");         time.sleep(1)
-
-
-
-
-
-
-
-
-
-
-
+    print("\033[32mAll Done!\033[0m");         time.sleep(1)
 
 
 #============================================= MAIN NAVIGATOR ====================================================================================
@@ -539,22 +412,16 @@ def menu():
         opc = input("    \033[1;38;5;208mOption: \033[0m")
 
 #=== menu option 1
-
         if opc == "1":
             time_start = time.time()
-            audio_dangan_foward();clear_console()
+            clear_console()
             Syu()
-            audio_dangan_foward_2()
-
-            time_end = time.time();barra();         print(f"\033[1;93mElapsed time: {time_start - time_end:.4f}\033[0m")
-            barra();confirmation()
+            time_end = time.time();bar();         print(f"\033[1;93mElapsed time: {time_start - time_end:.4f}\033[0m")
+            bar();confirmation()
 
 #=== menu option 2
-
         elif opc == "2":
-            audio_dangan_foward()
             while True:
-
                 opc2_menu_print();        opc = input("    \033[38;5;208mOption: \033[0m")
                 if opc == "1":
                    speedtest_cli()
@@ -566,66 +433,58 @@ def menu():
                     leave_menu();time.sleep(0.6);  break
 
 #=== menu option 3
-
         elif opc == "3":
-            audio_dangan_foward()
             clear_console()
             while True:
-
                 opc3_menu_print()
                 opc = input("    \033[38;5;208mOption: \033[0m")
-
 
                 if opc == "1":
                     download_utilitaries()
                     all_done()
-
                 elif opc == "2":
                     download_gaming()
                     all_done()
                 elif opc == "3":
                     download_worktools()
                     all_done()
-
                 elif opc == "4":
-                    audio_dangan_foward();      show_packages();                        create_new_ascii()
-                    audio_dangan_foward_2();    confirmation();
-
-                elif opc == "0":
-                    leave_menu();       time.sleep(0.6);            break
+                    show_packages();                        create_new_ascii()
+                    confirmation()
                 else:
                     leave_menu();       time.sleep(0.6);            break
 
 #=== menu option 4
-
         elif opc == "4":
             clear_console();  list_components()
 
 #=== menu option 5
-
         elif opc == "5":
             clear_console(); power_menu()
+
 #=== menu option 6
         elif opc == "6":
-            audio_dangan_foward();run_ani_cli();audio_dangan_back()
+            run_ani_cli()
+
 #=== menu option 7
         elif opc == "7":
             while True:
                 opc7_menu_print();
                 opc = input("    \033[1;38;5;208mOption: \033[0m")
                 if opc == "1":
-                    audio_dangan_foward_2();   subprocess.run(["kate", "/usr/share/cachyos-fish-config/cachyos-config.fish"])
+                    subprocess.run(["kate", "/usr/share/cachyos-fish-config/cachyos-config.fish"])
                 elif opc == "2":
-                    audio_dangan_foward();      update_config_fish()
+                    update_config_fish()
                     all_done()
 
                 elif opc == "3":
-                    audio_dangan_foward();      open_kitty_conf()
+                    open_kitty_conf()
                     all_done()
 
                 elif opc == "4":
-                        audio_dangan_foward();      configure_kitty()
+                        configure_kitty()
                         all_done()
+
                 elif opc == "5":
                     os.system("kitten themes");
                 else:
@@ -638,44 +497,37 @@ def menu():
                 home = os.path.expanduser("~")
 
                 if opc == "1":
-                    audio_fastfetch_up(); fastfetch()
+                    fastfetch()
                     tungtung = input(":")
-                    audio_fastfetch_down()
-
                 elif opc == "2":
-                    audio_dangan_foward_2()
                     configure_ascii()
 
                 elif opc == "3":
-                    audio_dangan_foward();      create_new_ascii()
+                    create_new_ascii()
                     all_done()
 
                 elif opc == "4":
-                    audio_dangan_foward_2()
                     config_fastfetch = os.path.join(home, ".config/fastfetch/config.jsonc")
                     subprocess.run(["kate", config_fastfetch])
                 elif opc == "5":
-                    audio_dangan_foward()
                     create_fastfetch()
                     all_done()
                 else:
-                    leave_menu;time.sleep(0.6);  break
-
+                    leave_menu();time.sleep(0.6);  break
 
 #=== menu extras
         elif opc == "9":
             developer_menu()
 
-
         elif opc == "0":
-            audio_main_menu_leave_2();     cont1 += 1;                print("      \033[31mGoodbye...\033[0m")
+            cont1 += 1;                print("      \033[31mGoodbye...\033[0m")
             time.sleep(0.8); clear_console()
         else:
-            audio_main_menu_leave();   print("  \033[31mSelect Valid Option...\033[0m");   time.sleep(0.5)
+            print("  \033[31mSelect Valid Option...\033[0m");   time.sleep(0.5)
 #===================================================== MAIN ====================================================#"
 
 def main():
-    audio_main_menu_enter(); barra(); menu()
+    menu()
 
 "#===================================================================================================================#"
 
