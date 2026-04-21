@@ -1,6 +1,4 @@
-import os
-import subprocess
-import time
+import os, subprocess, time
 
 #============================================= DEF'S OPÇÃO 1 =================================================================#"
 
@@ -51,7 +49,7 @@ def download_utilitaries():
     comando = '''
     sudo pacman -S --needed yay python xorg-server curl speedtest-cli libreoffice-fresh git python-pip python thunderbird kitty nemo vlc flatpak zip fuse2 &&
 
-    yay -S --needed shortwave &&
+    yay -S --needed shortwave zapzap &&
 
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo &&
     flatpak install -y flathub io.github.brunofin.Cohesion org.localsend.localsend_app com.brave.Browser app.ytmdesktop.ytmdesktop io.missioncenter.MissionCenter io.github.kolunmi.Bazaar'''
@@ -90,7 +88,7 @@ def download_worktools():
 def show_packages():
     print("\n=== UTILITARIES ===")
     print("pacman: yay, python, xorg-server,curl, libreoffice-fresh, git, python-pip, thunderbird, kitty, nemo, vlc, flatpak, zip, fuse2")
-    print("yay: shortwave")
+    print("yay: shortwave zapzap")
     print("flatpak: io.github.brunofin.Cohesion, org.localsend.localsend_app, com.brave.Browser, app.ytmdesktop.ytmdesktop, io.missioncenter.MissionCenter, io.github.kolunmi.Bazaar")
 
     print("\n=== GAMING ===")
@@ -100,8 +98,6 @@ def show_packages():
     print("pacman: yay, python, wget, python-pip, nmap, krita, neofetch, obs-studio, vim, vesktop, pycharm-community-edition, virtualbox, virtualbox-host-modules-arch")
     print("yay: ani-cli, google-earth-pro")
     print("flatpak: com.visualstudio.code, us.zoom.Zoom, it.mijorus.gearlever, com.github.tchx84.Flatseal")
-
-
 
 
 #============================================= DEF'S OPÇÃO 4 =================================================================#"
