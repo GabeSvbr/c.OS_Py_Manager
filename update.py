@@ -112,28 +112,29 @@ def list_components():
 #============================================= DEF'S OPTION 5 =================================================================#"
 
 def power_menu():
-    opc5_menu_print()
-    try:
-        opc = int(input("    \033[1;38;5;208mOption: \033[0m"))
-    except ValueError:
-        print("  \033[31mInput Valid Argument...\033[0m");   time.sleep(0.5)
-        continue
-    if opc == 1:
-        opc = input("      \033[31mAre you sure \033[32m(y/n)\033[31m: \033[0m")
-        if opc == "y":
-            os.system("shutdown now")
+    while True:
+        opc5_menu_print()
+        try:
+            opc = int(input("    \033[1;38;5;208mOption: \033[0m"))
+        except ValueError:
+            print("  \033[31mInput Valid Argument...\033[0m");   time.sleep(0.5)
+            continue
+        if opc == 1:
+            opc = input("      \033[31mAre you sure \033[32m(y/n)\033[31m: \033[0m")
+            if opc == "y":
+                os.system("shutdown now")
+            else:
+                clear_console();print("\033[1;32mReturning...\033[0m");time.sleep(0.7)
+        elif opc == 2:
+            opc = input("      \033[31mAre you sure \033[32m(y/n)\033[31m: \033[0m")
+            if opc == "y":
+                os.system("reboot")
+            else:
+                clear_console();print("\033[1;32mReturning...\033[0m");time.sleep(0.7)
+        elif opc == 3:
+                os.system("systemctl suspend")
         else:
-            clear_console();print("\033[1;32mReturning...\033[0m");time.sleep(0.7)
-    elif opc == 2:
-        opc = input("      \033[31mAre you sure \033[32m(y/n)\033[31m: \033[0m")
-        if opc == "y":
-            os.system("reboot")
-        else:
-            clear_console();print("\033[1;32mReturning...\033[0m");time.sleep(0.7)
-    elif opc == 3:
-            os.system("systemctl suspend")
-    else:
-        print("\033[1;32mReturning...\033[0m");time.sleep(0.7)
+            print("\033[1;32mReturning...\033[0m");time.sleep(0.7); break
 
 
 #============================================= DEF'S OPTION 6 =================================================================#"
@@ -258,7 +259,7 @@ def main_menu_print():
     print(f"\033[1;38;5;208m  ----< {time.strftime('%H:%M')} >----< Pinalto's CachyOS Manager >-------\033[0m"); bar()
     print("\033[1m |  \033[38;5;208m1 ➜\033[0m \033[1;36mComplete System Update\033[0m                          |\033[0m")
     print("\033[1m |                                                      |\033[0m")
-    print("\033[1m |  \033[38;5;208m2 ➜\033[0m \033[1;36mNetwork Tools\033[0m                          |\033[0m")
+    print("\033[1m |  \033[38;5;208m2 ➜\033[0m \033[1;36mNetwork Tools\033[0m                                   |\033[0m")
     print("\033[1m |                                                      |\033[0m")
     print("\033[1m |  \033[38;5;208m3 ➜\033[0m \033[1;36mSetup Options\033[0m                                   |\033[0m")
     print("\033[1m |                                                      |\033[0m")
@@ -302,6 +303,7 @@ def opc3_menu_print():
     bar()
 
 def opc5_menu_print():
+    clear_console()
     print("\033[38;5;208m             ----- Power Options -----  \033[0m"); bar()
     print(" |  \033[1;38;5;208m1 ➜\033[0m \033[1;36mPower Off\033[0m                                       |")
     print(" |                                                      |")
