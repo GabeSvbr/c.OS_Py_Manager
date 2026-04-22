@@ -1,6 +1,6 @@
 import os, subprocess, time
 
-#============================================= DEF'S OPÇÃO 1 =================================================================#"
+#============================================= DEF'S OPTION 1 =================================================================#"
 
 def Syu():
     bar(); print("\033[38;5;208m             ----- Updating System -----  \033[0m"); bar(); time.sleep(0.4)
@@ -19,7 +19,7 @@ def Syu():
         except subprocess.CalledProcessError:
             print(f"[erro] {nome}")
 
-#============================================= DEF'S OPÇÃO 2 =================================================================#"
+#============================================= DEF'S OPTION 2 =================================================================#"
 def speedtest_cli():
     print("\n\033[1;32mChecking speedtest-cli Instalation...\033[0m")
     subprocess.run("pacman -Qq speedtest-cli >/dev/null || sudo pacman -S --noconfirm speedtest-cli", shell=True)
@@ -44,12 +44,12 @@ def ip_info():
     except:
         print("Local IP: Unable to get it.")
     confirmation()
-#============================================= DEF'S OPÇÃO 3 =================================================================#"
+#============================================= DEF'S OPTION 3 =================================================================#"
 def download_utilitaries():
     comando = '''
     sudo pacman -S --needed yay python xorg-server curl speedtest-cli libreoffice-fresh git python-pip python thunderbird kitty nemo vlc flatpak zip fuse2 &&
 
-    yay -S --needed shortwave zapzap &&
+    yay -S --needed shortwave &&
 
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo &&
     flatpak install -y flathub io.github.brunofin.Cohesion org.localsend.localsend_app com.brave.Browser app.ytmdesktop.ytmdesktop io.missioncenter.MissionCenter io.github.kolunmi.Bazaar'''
@@ -62,7 +62,7 @@ def download_utilitaries():
 
 def download_gaming():
     comando = '''
-    sudo pacman -S --needed steam mangohud gamemode prismlauncher
+    sudo pacman -S --needed steam mangohud gamemode prismlauncher protonup-qt
     '''
     try:
         subprocess.run(comando, shell=True, check=True)
@@ -88,7 +88,7 @@ def download_worktools():
 def show_packages():
     print("\n=== UTILITARIES ===")
     print("pacman: yay, python, xorg-server,curl, libreoffice-fresh, git, python-pip, thunderbird, kitty, nemo, vlc, flatpak, zip, fuse2")
-    print("yay: shortwave zapzap")
+    print("yay: shortwave")
     print("flatpak: io.github.brunofin.Cohesion, org.localsend.localsend_app, com.brave.Browser, app.ytmdesktop.ytmdesktop, io.missioncenter.MissionCenter, io.github.kolunmi.Bazaar")
 
     print("\n=== GAMING ===")
@@ -100,39 +100,43 @@ def show_packages():
     print("flatpak: com.visualstudio.code, us.zoom.Zoom, it.mijorus.gearlever, com.github.tchx84.Flatseal")
 
 
-#============================================= DEF'S OPÇÃO 4 =================================================================#"
+
+
+#============================================= DEF'S OPTION 4 =================================================================#"
 
 def list_components():
     clear_console();   bar();                print("\033[1;38;5;208m                  --- COMPONENTS ---                          \033[0m");  bar()
     time_start= time.time();    os.system("inxi -F");   time_end=time.time();
     bar();print(f"\033[1;93mElapsed time: {time_start - time_end:.4f}\033[0m");bar();confirmation()
 
-#============================================= DEF'S OPÇÃO 5 =================================================================#"
+#============================================= DEF'S OPTION 5 =================================================================#"
 
 def power_menu():
     opc5_menu_print()
-    opc = input("    \033[38;5;208mOption: \033[0m");
-
-
-    if opc == "1":
+    try:
+        opc = int(input("    \033[1;38;5;208mOption: \033[0m"))
+    except ValueError:
+        print("  \033[31mInput Valid Argument...\033[0m");   time.sleep(0.5)
+        continue
+    if opc == 1:
         opc = input("      \033[31mAre you sure \033[32m(y/n)\033[31m: \033[0m")
         if opc == "y":
             os.system("shutdown now")
         else:
             clear_console();print("\033[1;32mReturning...\033[0m");time.sleep(0.7)
-    elif opc == "2":
+    elif opc == 2:
         opc = input("      \033[31mAre you sure \033[32m(y/n)\033[31m: \033[0m")
         if opc == "y":
             os.system("reboot")
         else:
             clear_console();print("\033[1;32mReturning...\033[0m");time.sleep(0.7)
-    elif opc == "3":
+    elif opc == 3:
             os.system("systemctl suspend")
     else:
         print("\033[1;32mReturning...\033[0m");time.sleep(0.7)
 
 
-#============================================= DEF'S OPÇÃO 6 =================================================================#"
+#============================================= DEF'S OPTION 6 =================================================================#"
 
 def run_ani_cli():
     try:
@@ -144,7 +148,7 @@ def run_ani_cli():
         print("\033[1;31mUnable to run ani-cli.\033[0m")
         print("\033[1;32mReturning...\033[0m");time.sleep(1)
 
-#============================================= DEF'S OPÇÃO 7 =================================================================#"
+#============================================= DEF'S OTION 7 =================================================================#"
 
 
 def update_config_fish():
@@ -196,7 +200,7 @@ def open_kitty_conf():
     caminho = os.path.expanduser("~/.config/kitty/kitty.conf")
     subprocess.Popen(["kate", caminho])
 
-#============================================= DEF'S OPÇÃO 8 =================================================================#"
+#============================================= DEF'S OPTION 8 =================================================================#"
 
 def create_fastfetch():
     caminho_dir = os.path.expanduser("~/.config/fastfetch")
@@ -405,10 +409,14 @@ def menu():
     cont1 = 0
     while cont1 == 0:
         main_menu_print()
-        opc = input("    \033[1;38;5;208mOption: \033[0m")
+        try:
+            opc = int(input("    \033[1;38;5;208mOption: \033[0m"))
+        except ValueError:
+            print("  \033[31mInput Valid Argument...\033[0m");   time.sleep(0.5)
+            continue
 
 #=== menu option 1
-        if opc == "1":
+        if opc == 1:
             time_start = time.time()
             clear_console()
             Syu()
@@ -416,106 +424,124 @@ def menu():
             bar();confirmation()
 
 #=== menu option 2
-        elif opc == "2":
+        elif opc == 2:
             while True:
-                opc2_menu_print();        opc = input("    \033[38;5;208mOption: \033[0m")
-                if opc == "1":
+                opc2_menu_print()
+                try:
+                    opc = int(input("    \033[1;38;5;208mOption: \033[0m"))
+                except ValueError:
+                    print("  \033[31mInput Valid Argument...\033[0m");   time.sleep(0.5)
+                    continue
+                if opc == 1:
                    speedtest_cli()
-                elif opc == "2":
+                elif opc == 2:
                     restart_network()
-                elif opc == "3":
+                elif opc == 3:
                     ip_info()
                 else:
                     leave_menu();time.sleep(0.6);  break
 
 #=== menu option 3
-        elif opc == "3":
+        elif opc == 3:
             clear_console()
             while True:
                 opc3_menu_print()
-                opc = input("    \033[38;5;208mOption: \033[0m")
+                try:
+                    opc = int(input("    \033[1;38;5;208mOption: \033[0m"))
+                except ValueError:
+                    print("  \033[31mInput Valid Argument...\033[0m");   time.sleep(0.5)
+                    continue
 
-                if opc == "1":
+                if opc == 1:
                     download_utilitaries()
                     all_done()
-                elif opc == "2":
+                elif opc == 2:
                     download_gaming()
                     all_done()
-                elif opc == "3":
+                elif opc == 3:
                     download_worktools()
                     all_done()
-                elif opc == "4":
+                elif opc == 4:
                     show_packages();                        create_new_ascii()
                     confirmation()
                 else:
                     leave_menu();       time.sleep(0.6);            break
 
 #=== menu option 4
-        elif opc == "4":
+        elif opc == 4:
             clear_console();  list_components()
 
 #=== menu option 5
-        elif opc == "5":
+        elif opc == 5:
             clear_console(); power_menu()
 
 #=== menu option 6
-        elif opc == "6":
+        elif opc == 6:
             run_ani_cli()
 
 #=== menu option 7
-        elif opc == "7":
+        elif opc == 7:
             while True:
                 opc7_menu_print();
-                opc = input("    \033[1;38;5;208mOption: \033[0m")
-                if opc == "1":
+                try:
+                    opc = int(input("    \033[1;38;5;208mOption: \033[0m"))
+                except ValueError:
+                    print("  \033[31mInput Valid Argument...\033[0m");   time.sleep(0.5)
+                    continue
+                if opc == 1:
                     subprocess.run(["kate", "/usr/share/cachyos-fish-config/cachyos-config.fish"])
-                elif opc == "2":
+                elif opc == 2:
                     update_config_fish()
                     all_done()
 
-                elif opc == "3":
+                elif opc == 3:
                     open_kitty_conf()
                     all_done()
 
-                elif opc == "4":
+                elif opc == 4:
                         configure_kitty()
                         all_done()
 
-                elif opc == "5":
+                elif opc == 5:
                     os.system("kitten themes");
                 else:
                    leave_menu() ;   time.sleep(0.6);      break
 
 #=== menu option 8
-        elif opc == "8":
+        elif opc == 8:
              while True:
-                opc8_menu_print();        opc = input("    \033[38;5;208mOption: \033[0m")
+                opc8_menu_print();
+                try:
+                    opc = int(input("    \033[1;38;5;208mOption: \033[0m"))
+                except ValueError:
+                    print("  \033[31mInput Valid Argument...\033[0m");   time.sleep(0.5)
+                    continue
                 home = os.path.expanduser("~")
 
-                if opc == "1":
+                if opc == 1:
                     fastfetch()
                     tungtung = input(":")
-                elif opc == "2":
+                elif opc == 2:
                     configure_ascii()
 
-                elif opc == "3":
+                elif opc == 3:
                     create_new_ascii()
                     all_done()
 
-                elif opc == "4":
+                elif opc == 4:
                     config_fastfetch = os.path.join(home, ".config/fastfetch/config.jsonc")
                     subprocess.run(["kate", config_fastfetch])
-                elif opc == "5":
+                elif opc == 5:
                     create_fastfetch()
                     all_done()
                 else:
                     leave_menu();time.sleep(0.6);  break
 
 #=== menu extras
-        elif opc == "9":
+        elif opc == 9:
             developer_menu()
 
-        elif opc == "0":
+        elif opc == 0:
             cont1 += 1;                print("      \033[31mGoodbye...\033[0m")
             time.sleep(0.8); clear_console()
         else:
