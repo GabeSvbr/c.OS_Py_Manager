@@ -5,11 +5,7 @@ import os, subprocess, time
 def Syu():
     bar(); print("\033[38;5;208m             ----- Updating System -----  \033[0m"); bar(); time.sleep(0.4)
     comandos = [
-    ("yay", ["yay", "-Syu"]),
-    ("flatpak", ["flatpak", "update", "-y"]),
-    ("clear yay cache", ["yay", "-Scc", "--noconfirm"]),
-    ("clear pacman cache", ["sudo", "pacman", "-Scc", "--noconfirm"]),
-    ("clear orphans", "sudo pacman -Rns $(pacman -Qtdq)")
+    ("update + cleanup", "yay -Syu --noconfirm && flatpak update -y && yay -Scc --noconfirm && sudo pacman -Scc --noconfirm && sudo pacman -Rns $(pacman -Qtdq 2>/dev/null)")
     ]
 
     for nome, cmd in comandos:
@@ -20,18 +16,17 @@ def Syu():
             print(f"[erro] {nome}")
 
 #============================================= DEF'S OPTION 2 =================================================================#"
+
 def speedtest_cli():
     print("\n\033[1;32mChecking speedtest-cli Instalation...\033[0m")
     subprocess.run("pacman -Qq speedtest-cli >/dev/null || sudo pacman -S --noconfirm speedtest-cli", shell=True)
-    print("\033[1;32m Inicializing Speedtest...\n\033[0m")
-    subprocess.run(["speedtest-cli"])
-    confirmation()
+    print("\033[1;32m Inicializing Speedtest...\n\033[0m");time.sleep(0.5)
+    subprocess.run(["speedtest-cli"]);      confirmation()
 
 def restart_network():
     print("\n\033[1;32mRestarting Network Manager...\033[0m")
     subprocess.run(["sudo", "systemctl", "restart", "NetworkManager"])
-    print("\n\033[1;32mWifi conection restarted.\033[0m")
-    confirmation()
+    print("\n\033[1;32mWifi conection restarted.\033[0m");      confirmation()
 
 def ip_info():
     print("\n\033[1;38;5;120m--- IP INFO ---\033[0m")
@@ -42,7 +37,7 @@ def ip_info():
         ).decode().strip()
         print(f"Local IP: {ip}")
     except:
-        print("Local IP: Unable to get it.")
+        print("Local IP: Unable to get it."); time.sleep(0.8)
     confirmation()
 #============================================= DEF'S OPTION 3 =================================================================#"
 def download_utilitaries():
@@ -67,14 +62,12 @@ def download_gaming():
     try:
         subprocess.run(comando, shell=True, check=True)
     except subprocess.CalledProcessError:
-        print("Cucumber")
+        print("Error")
 
 def download_worktools():
     comando = '''
     sudo pacman -S --needed yay python nmap wget python-pip krita neofetch obs-studio vim vesktop pycharm-community-edition virtualbox virtualbox-host-modules-arch &&
-
     yay -S --needed ani-cli google-earth-pro &&
-
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo &&
     flatpak install -y flathub com.visualstudio.code us.zoom.Zoom it.mijorus.gearlever com.github.tchx84.Flatseal
     '''
@@ -90,17 +83,12 @@ def show_packages():
     print("pacman: yay, python, xorg-server,curl, libreoffice-fresh, git, python-pip, thunderbird, kitty, nemo, vlc, flatpak, zip, fuse2")
     print("yay: shortwave")
     print("flatpak: io.github.brunofin.Cohesion, org.localsend.localsend_app, com.brave.Browser, app.ytmdesktop.ytmdesktop, io.missioncenter.MissionCenter, io.github.kolunmi.Bazaar")
-
     print("\n=== GAMING ===")
     print("pacman: steam, mangohud, gamemode, prismlauncher")
-
     print("\n=== WORKTOOLS ===")
     print("pacman: yay, python, wget, python-pip, nmap, krita, neofetch, obs-studio, vim, vesktop, pycharm-community-edition, virtualbox, virtualbox-host-modules-arch")
     print("yay: ani-cli, google-earth-pro")
     print("flatpak: com.visualstudio.code, us.zoom.Zoom, it.mijorus.gearlever, com.github.tchx84.Flatseal")
-
-
-
 
 #============================================= DEF'S OPTION 4 =================================================================#"
 
@@ -115,7 +103,7 @@ def power_menu():
     while True:
         opc5_menu_print()
         try:
-            opc = int(input("    \033[1;38;5;208mOption: \033[0m"))
+            opc = int(input("    \033[1;38;5;208mOption: \033[0m")or 0)
         except ValueError:
             print("  \033[31mInput Valid Argument...\033[0m");   time.sleep(0.5)
             continue
@@ -150,7 +138,6 @@ def run_ani_cli():
         print("\033[1;32mReturning...\033[0m");time.sleep(1)
 
 #============================================= DEF'S OTION 7 =================================================================#"
-
 
 def update_config_fish():
     origem = os.path.expanduser("~/c.OS_PyManager/Assets/etc/Apply_Console_Config.txt")
@@ -348,6 +335,7 @@ def opc8_menu_print():
 
 
 #=============================================  Developer Menu  ===================================================================
+
 def developer_menu():
     clear_console();      print(time.strftime("%H:%M"))
     print("\033[31mTexto vermelho\033[0m")
@@ -374,12 +362,11 @@ def developer_menu():
     print("\033[1;38;5;201mRosa\033[0m")
     while True:
         opc = input("\033[38;5;208mOption: \033[0m")
-        if opc == 1:
+        if opc == "1":
             print("11111")
         else:
             print("Leaving")
-            time.sleep(0.2)
-            break
+            time.sleep(0.2);break
 
 #============================================= Little DEF's ======================================================================
 
@@ -399,7 +386,7 @@ def confirmation_power():
     return input("\033[31mAre you sure \033[32m(y/n)\033[31m: \033[0m").lower() == "y"
 
 def leave_menu():
-    print("\033[31mLeaving...\033[0m")
+    print("\033[1;32mReturning...\033[0m")
 
 def all_done():
     print("\033[32mAll Done!\033[0m");         time.sleep(1)
@@ -417,20 +404,19 @@ def menu():
             print("  \033[31mInput Valid Argument...\033[0m");   time.sleep(0.5)
             continue
 
-#=== menu option 1
+#===> menu option 1
         if opc == 1:
-            time_start = time.time()
-            clear_console()
+            time_start = time.time();       clear_console()
             Syu()
             time_end = time.time();bar();         print(f"\033[1;93mElapsed time: {time_start - time_end:.4f}\033[0m")
             bar();confirmation()
 
-#=== menu option 2
+#===> menu option 2
         elif opc == 2:
             while True:
                 opc2_menu_print()
                 try:
-                    opc = int(input("    \033[1;38;5;208mOption: \033[0m"))
+                    opc = int(input("    \033[1;38;5;208mOption: \033[0m")or 0)
                 except ValueError:
                     print("  \033[31mInput Valid Argument...\033[0m");   time.sleep(0.5)
                     continue
@@ -443,13 +429,13 @@ def menu():
                 else:
                     leave_menu();time.sleep(0.6);  break
 
-#=== menu option 3
+#===> menu option 3
         elif opc == 3:
             clear_console()
             while True:
                 opc3_menu_print()
                 try:
-                    opc = int(input("    \033[1;38;5;208mOption: \033[0m"))
+                    opc = int(input("    \033[1;38;5;208mOption: \033[0m")or 0)
                 except ValueError:
                     print("  \033[31mInput Valid Argument...\033[0m");   time.sleep(0.5)
                     continue
@@ -468,25 +454,25 @@ def menu():
                     confirmation()
                 else:
                     leave_menu();       time.sleep(0.6);            break
-
-#=== menu option 4
+                    
+#===> menu option 4
         elif opc == 4:
             clear_console();  list_components()
 
-#=== menu option 5
+#===> menu option 5
         elif opc == 5:
             clear_console(); power_menu()
 
-#=== menu option 6
+#===> menu option 6
         elif opc == 6:
             run_ani_cli()
 
-#=== menu option 7
+#===> menu option 7
         elif opc == 7:
             while True:
                 opc7_menu_print();
                 try:
-                    opc = int(input("    \033[1;38;5;208mOption: \033[0m"))
+                    opc = int(input("    \033[1;38;5;208mOption: \033[0m")or 0)
                 except ValueError:
                     print("  \033[31mInput Valid Argument...\033[0m");   time.sleep(0.5)
                     continue
@@ -509,12 +495,12 @@ def menu():
                 else:
                    leave_menu() ;   time.sleep(0.6);      break
 
-#=== menu option 8
+#===> menu option 8
         elif opc == 8:
              while True:
                 opc8_menu_print();
                 try:
-                    opc = int(input("    \033[1;38;5;208mOption: \033[0m"))
+                    opc = int(input("    \033[1;38;5;208mOption: \033[0m")or 0)
                 except ValueError:
                     print("  \033[31mInput Valid Argument...\033[0m");   time.sleep(0.5)
                     continue
@@ -539,7 +525,7 @@ def menu():
                 else:
                     leave_menu();time.sleep(0.6);  break
 
-#=== menu extras
+#===> Extra menu's
         elif opc == 9:
             developer_menu()
 
