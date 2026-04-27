@@ -63,7 +63,7 @@ def download_worktools():
     sudo pacman -S --needed yay python nmap wget python-pip krita neofetch obs-studio vim vesktop pycharm-community-edition virtualbox virtualbox-host-modules-arch &&
     yay -S --needed ani-cli google-earth-pro &&
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo &&
-    flatpak install -y flathub com.visualstudio.code us.zoom.Zoom it.mijorus.gearlever com.github.tchx84.Flatseal
+    flatpak install -y flathub com.visualstudio.code  it.mijorus.gearlever com.github.tchx84.Flatseal
     '''
 
     try:
@@ -82,7 +82,7 @@ def show_packages():
     print("\n=== WORKTOOLS ===")
     print("pacman: yay, python, wget, python-pip, nmap, krita, neofetch, obs-studio, vim, vesktop, pycharm-community-edition, virtualbox, virtualbox-host-modules-arch")
     print("yay: ani-cli, google-earth-pro")
-    print("flatpak: com.visualstudio.code, us.zoom.Zoom, it.mijorus.gearlever, com.github.tchx84.Flatseal")
+    print("flatpak: com.visualstudio.code, it.mijorus.gearlever, com.github.tchx84.Flatseal")
 
 #============================================= DEF'S OPTION 4 =================================================================#"
 
