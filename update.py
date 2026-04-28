@@ -52,6 +52,8 @@ def download_utilitaries():
 def download_gaming():
     comando = '''
     sudo pacman -S --needed steam mangohud gamemode prismlauncher protonup-qt
+    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo &&
+    flatpak install -y flathub com.protonvpn.www
     '''
     try:
         subprocess.run(comando, shell=True, check=True)
