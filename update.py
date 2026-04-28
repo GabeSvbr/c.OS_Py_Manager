@@ -443,15 +443,13 @@ def menu():
                 if opc == 1:
                     subprocess.run(["kate", "/usr/share/cachyos-fish-config/cachyos-config.fish"])
                 elif opc == 2:
-                    update_config_fish()
-                    all_done()
+                    update_config_fish();           all_done()
 
                 elif opc == 3:
                     open_kitty_conf()
 
                 elif opc == 4:
-                        configure_kitty()
-                        all_done()
+                        configure_kitty();          all_done()
 
                 elif opc == 5:
                     os.system("kitten themes");
@@ -470,21 +468,18 @@ def menu():
                 home = os.path.expanduser("~")
 
                 if opc == 1:
-                    fastfetch()
-                    tungtung = input(":")
+                    fastfetch();        tungtung = input(":")
                 elif opc == 2:
-                    configure_ascii()
+                    configure_ascii();      all_done()
 
                 elif opc == 3:
-                    create_new_ascii()
-                    all_done()
+                    create_new_ascii();     all_done()
 
                 elif opc == 4:
                     config_fastfetch = os.path.join(home, ".config/fastfetch/config.jsonc")
                     subprocess.run(["kate", config_fastfetch])
                 elif opc == 5:
-                    create_fastfetch()
-                    all_done()
+                    create_fastfetch();     all_done()
                 else:
                     leave_menu();time.sleep(0.6);  break
 
