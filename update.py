@@ -146,7 +146,7 @@ def update_config_fish():
             text=True
         )
         if processo.returncode == 0:
-            print("Sucess!"): time.sleep(0.5)
+            print("Sucess!"); time.sleep(0.5)
         else:
             print("Error")
     except Exception as e:
