@@ -148,31 +148,30 @@ alias componentes="inxi -F"
                     text=True
                 )
 
+
 def configure_kitty(destino=None):
-    try:
-        base_dir = os.path.dirname(os.path.abspath(__file__))
-        origem = os.path.join(base_dir, "Assets", "etc", "kitty.conf")
+    caminho = os.path.expanduser("~/.config/kitty/kitty.conf")
+    config = """confirm_os_window_close 0
+cursor_trail 1
+cursor_shape beam
+cursor_beam_thickness 4
+cursor_stop_blinking_after 0
+cursor_shape_unfocused unchanged
+font_size 11.0
+cursor_blink_interval 0.5
+window_padding_width 25
+font_family JetBrainsMono Nerd Font
+bold_font auto
+italic_font auto
+bold_italic_font auto
+background_opacity 0.9
+hide_window_decorations yes
+include current-theme.conf
+"""
+    os.makedirs(os.path.dirname(caminho), exist_ok=True)
 
-        if destino is None:
-            destino = os.path.expanduser("~/.config/kitty/kitty.conf")
-
-        with open(origem, "r") as f:
-            conteudo = f.read()
-
-        processo = subprocess.run(
-            ["sudo", "tee", destino],
-            input=conteudo,
-            text=True,
-            capture_output=True
-        )
-        if processo.returncode == 0:
-            print("kitty.conf atualizado"); time.sleep(0.5)
-        else:
-            print(f"Error: {processo.stderr}")
-
-    except Exception as e:
-        print(f"Error: {e}")
-
+    with open(caminho, "w") as f:  # 🔥 "w" apaga tudo
+        f.write(config)
 def open_kitty_conf():
     caminho = os.path.expanduser("~/.config/kitty/kitty.conf")
     subprocess.Popen(["kate", caminho])
