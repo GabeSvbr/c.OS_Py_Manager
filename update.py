@@ -63,7 +63,7 @@ def download_gaming():
 def download_worktools():
     comando = '''
     sudo pacman -S --needed yay python nmap wget python-pip krita neofetch obs-studio vim vesktop pycharm-community-edition virtualbox virtualbox-host-modules-arch &&
-    yay -S --needed ani-cli google-earth-pro &&
+    yay -S --needed google-earth-pro &&
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo &&
     flatpak install -y flathub com.visualstudio.code  it.mijorus.gearlever com.github.tchx84.Flatseal
     '''
@@ -83,7 +83,7 @@ def show_packages():
     print("pacman: steam, mangohud, gamemode, prismlauncher")
     print("\n=== WORKTOOLS ===")
     print("pacman: yay, python, wget, python-pip, nmap, krita, neofetch, obs-studio, vim, vesktop, pycharm-community-edition, virtualbox, virtualbox-host-modules-arch")
-    print("yay: ani-cli, google-earth-pro")
+    print("yay: google-earth-pro")
     print("flatpak: com.visualstudio.code, it.mijorus.gearlever, com.github.tchx84.Flatseal")
 
 #============================================= DEF'S OPTION 4 =================================================================#"
@@ -125,8 +125,12 @@ def run_ani_cli():
     try:
         subprocess.run(["ani-cli"], check=True)
     except FileNotFoundError:
-        print("\033[1;31mError: ani-cli not installed.\033[0m")
-        print("\033[1;32mReturning...\033[0m");time.sleep(1)
+        print("\033[1;31mError: ani-cli not installed.\033[0m");time.sleep(0.5)
+        inst_ask = input("   \033[1;32mWould you like to install Ani=cli? (y/N)\033[0m\n:")
+        if inst_ask.lower() == "y":
+            subprocess.run(["yay", "-S", "ani-cli"])
+        else:
+            print("\033[1;32mReturning...\033[0m");time.sleep(1)
     except subprocess.CalledProcessError:
         print("\033[1;31mUnable to run ani-cli.\033[0m")
         print("\033[1;32mReturning...\033[0m");time.sleep(1)
