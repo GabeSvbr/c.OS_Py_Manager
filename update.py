@@ -1,13 +1,11 @@
 import os, subprocess, time
 
 #============================================= DEF'S OPTION 1 =================================================================#"
-
 def Syu():
     bar(); print("\033[38;5;208m             ----- Updating System -----  \033[0m"); bar(); time.sleep(0.4)
     comandos = [
     ("update + cleanup", "yay -Syu --noconfirm && flatpak update -y && yay -Scc --noconfirm && sudo pacman -Scc --noconfirm && sudo pacman -Rns $(pacman -Qtdq 2>/dev/null)")
     ]
-
     for nome, cmd in comandos:
         try:
             subprocess.run(cmd, shell=isinstance(cmd, str), check=True)
@@ -16,7 +14,6 @@ def Syu():
             print(f"[erro] {nome}")
 
 #============================================= DEF'S OPTION 2 =================================================================#"
-
 def speedtest_cli():
     print("\n\033[1;32mChecking speedtest-cli Instalation...\033[0m")
     subprocess.run("pacman -Qq speedtest-cli >/dev/null || sudo pacman -S --noconfirm speedtest-cli", shell=True)
@@ -48,7 +45,6 @@ def download_utilitaries():
         print("Instalation Over.")
     except subprocess.CalledProcessError:
         print("Error Durring Instalation.")
-
 def download_gaming():
     comando = '''
     sudo pacman -S --needed steam mangohud gamemode prismlauncher protonup-qt
@@ -59,7 +55,6 @@ def download_gaming():
         subprocess.run(comando, shell=True, check=True)
     except subprocess.CalledProcessError:
         print("Error")
-
 def download_worktools():
     comando = '''
     sudo pacman -S --needed yay python nmap wget python-pip krita neofetch obs-studio vim vesktop pycharm-community-edition virtualbox virtualbox-host-modules-arch &&
@@ -73,7 +68,6 @@ def download_worktools():
         print("Instalation Over.")
     except subprocess.CalledProcessError:
         print("Error During Installation.")
-
 def show_packages():
     print("\n=== UTILITARIES ===")
     print("pacman: yay, python, xorg-server,curl, libreoffice-fresh, git, python-pip, thunderbird, kitty, nemo, vlc, flatpak, zip, fuse2")
@@ -87,14 +81,11 @@ def show_packages():
     print("flatpak: com.visualstudio.code, it.mijorus.gearlever, com.github.tchx84.Flatseal")
 
 #============================================= DEF'S OPTION 4 =================================================================#"
-
 def list_components():
     clear_console();   bar();                print("\033[1;38;5;208m                  --- COMPONENTS ---                          \033[0m");  bar()
     time_start= time.time();    os.system("inxi -F");   time_end=time.time();
     bar();print(f"\033[1;93mElapsed time: {time_start - time_end:.4f}\033[0m");bar();confirmation()
-
 #============================================= DEF'S OPTION 5 =================================================================#"
-
 def power_menu():
     while True:
         opc5_menu_print()
@@ -118,9 +109,7 @@ def power_menu():
                 os.system("systemctl suspend")
         else:
             leave_menu();   break
-
 #============================================= DEF'S OPTION 6 =================================================================#"
-
 def run_ani_cli():
     try:
         subprocess.run(["ani-cli"], check=True)
@@ -134,54 +123,53 @@ def run_ani_cli():
     except subprocess.CalledProcessError:
         print("\033[1;31mUnable to run ani-cli.\033[0m")
         print("\033[1;32mReturning...\033[0m");time.sleep(1)
-
 #============================================= DEF'S OTION 7 =================================================================#"
-
 def update_config_fish():
-    origem = os.path.expanduser("~/c.OS_PyManager/Assets/etc/Apply_Console_Config.txt")
-    destino = "/usr/share/cachyos-fish-config/cachyos-config.fish"
-
-    try:
-        with open(origem, "r") as f:
-            conteudo = f.read()
-        processo = subprocess.run(
-            ["sudo", "tee", destino],
-            input=conteudo,
-            text=True
-        )
-        if processo.returncode == 0:
-            print("Sucess!"); time.sleep(0.5)
-        else:
-            print("Error")
-    except Exception as e:
-        print(f"Error: {e}")
+            caminho = "/usr/share/cachyos-fish-config/cachyos-config.fish"
+            linha = """alias central="python $HOME/c.OS_PyManager/update.py"
+alias centralc="kate $HOME/c.OS_PyManager/update.py"
+alias update='sudo pacman -Syu && sudo pacman -Sc && sudo pacman -Rns (pacman -Qtdq) && sudo journalctl --vacuum-time=7d && sudo fstrim -av'
+alias audio='alsamixer'
+alias anime='ani-cli'
+alias reb='reboot'
+alias off='poweroff'
+alias config_fish="kate /usr/share/cachyos-fish-config/cachyos-config.fish"
+alias config_neofetch='kate ~/.config/neofetch/config.conf'
+alias config_fastfetch='kate ~/.config/fastfetch/config.jsonc'
+alias componentes="inxi -F"
+"""
+            with open(caminho, "r") as f:
+                linhas = [l.strip() for l in f.readlines()]
+            if linha not in linhas:
+                subprocess.run(
+                    ["sudo", "tee", "-a", caminho],
+                    input=linha + "\n",
+                    text=True
+                )
 
 def configure_kitty(destino=None):
-    try:
-        base_dir = os.path.dirname(os.path.abspath(__file__))
-        origem = os.path.join(base_dir, "Assets", "etc", "kitty.conf")
+    caminho = os.path.expanduser("~/.config/kitty/kitty.conf")
+    config = """confirm_os_window_close 0
+cursor_trail 1
+cursor_shape beam
+cursor_beam_thickness 4
+cursor_stop_blinking_after 0
+cursor_shape_unfocused unchanged
+font_size 11.0
+cursor_blink_interval 0.5
+window_padding_width 25
+font_family JetBrainsMono Nerd Font
+bold_font auto
+italic_font auto
+bold_italic_font auto
+background_opacity 0.9
+hide_window_decorations yes
+include current-theme.conf
+"""
+    os.makedirs(os.path.dirname(caminho), exist_ok=True)
 
-        if destino is None:
-            destino = os.path.expanduser("~/.config/kitty/kitty.conf")
-
-        with open(origem, "r") as f:
-            conteudo = f.read()
-
-        processo = subprocess.run(
-            ["sudo", "tee", destino],
-            input=conteudo,
-            text=True,
-            capture_output=True
-        )
-
-        if processo.returncode == 0:
-            print("kitty.conf atualizado"); time.sleep(0.5)
-        else:
-            print(f"Error: {processo.stderr}")
-
-    except Exception as e:
-        print(f"Error: {e}")
-
+    with open(caminho, "w") as f:  # 🔥 "w" apaga tudo
+        f.write(config)
 def open_kitty_conf():
     caminho = os.path.expanduser("~/.config/kitty/kitty.conf")
     subprocess.Popen(["kate", caminho])
@@ -193,15 +181,46 @@ def create_fastfetch():
     os.makedirs(caminho_dir, exist_ok=True)
 
     caminho_arquivo = os.path.join(caminho_dir, "config.jsonc")
-    template = os.path.join(
-    os.path.expanduser("~"),
-    "c.OS_PyManager",
-    "Assets",
-    "etc",
-    "Apply_FastFetch.txt"
-    )
-    with open(template, "r", encoding="utf-8") as f:
-        conteudo = f.read()
+
+    conteudo = """{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+        "source": "~/.config/fastfetch/ascii.txt",
+        "color": {
+            "1": "0"
+        }
+    },
+    "modules": [
+        {
+            "type": "os",
+            "key": "OS  ",
+            "keyColor": "red"  // = color1
+        },
+        {
+            "type": "wm",
+            "key": "WM  ",
+            "keyColor": "32"
+        },
+        {
+            "type": "cpu",
+            "format": "{1} ({3}) @ {7} GHz",
+            "key": "CPU ",
+            "keyColor": "blue"
+        },
+        {
+            "type": "gpu",
+            "format": "{1} {2} @ {12} GHz",
+            "key": "GPU ",
+            "keyColor": "33"
+        },
+        {
+            "type": "memory",
+            "key": "MEM ",
+            "keyColor": "cyan"
+        }
+    ]
+}"""
+
     with open(caminho_arquivo, "w", encoding="utf-8") as f:
         f.write(conteudo)
 
@@ -211,25 +230,13 @@ def configure_ascii():
 def create_new_ascii():
     caminho = os.path.expanduser("~/.config/fastfetch/ascii.txt")
     os.makedirs(os.path.dirname(caminho), exist_ok=True)
-    arte = """⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠶⣦⢀⢠⣔⡶⠖⠦⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⢀⣠⣤⡴⣲⣽⣛⢺⣧⣄⡀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⡌⣿⣿⣿⣷⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣛⡿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⢸⣿⣿⣿⣿⣿⣿⠿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡳⡀⠙⠄⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠉⠛⣾⣿⣿⣿⡟⡴⢹⣿⣿⣿⡟⡜⢿⣿⣿⣧⢳⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⢸⡄⣿⣿⡿⠋⠘⠛⢆⣽⡿⠏⠌⠚⠊⢿⣿⣿⢸⣧⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⣧⢹⣿⡇⣿⠁⠀⣴⣬⣶⡇⠀⣼⠃⠈⢿⡇⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⡻⣿⢹⣿⣾⣿⡿⢿⣷⣾⢟⡀⣼⢊⣸⣿⣿⣿⣇⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠈⠣⢉⢙⢛⡛⠋⣭⡅⣞⣃⠃⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⡴⠓⠠⣰⣆⠎⡀⠡⠧⡟⣎⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠰⡅⠠⠁⠁⣶⡇⢷⠶⢪⣶⡇⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀
-⠀⠀⠀⠀⠀⢠⠇⠣⣀⠁⠂⠿⠧⠀⢂⣿⣿⡇⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀⠀⠀
-⠀⠀⠀⠀⡸⡁⠀⡀⠈⠉⠠⠐⡀⢀⠈⡻⣿⣇⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀
-⠀⠀⠀⢮⣈⠹⢷⢠⣬⣀⣁⣒⣤⢠⡶⡁⢿⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀
-⠀⠀⠀⠀⠀⢸⠷⣮⣭⢘⡛⣛⡛⠴⡈⠀⠀⢸⣿⣿⣿⣿⣿⣿⡯⢸⣿⡏⠀⠀
-⠀⠀⠀⠀⠀⢸⠀⠀⠀⡞⢻⠀⠀⠀⡗⠀⠀⣸⣿⣿⣿⣿⣿⡿⠁⣿⠟⠈⠀⠀
-⠀⠀⠀⠀⠀⢸⠀⠀⡸⠀⢸⠀⠀⢸⠀⢀⣼⣿⣿⣿⠿⠛⠀⠀⠜⠁⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠘⣀⣸⠀⠀⠀⢧⣀⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    arte = """⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+     ▄▀ ▄▀
+      ▀  ▀
+    █▀▀▀▀▀█▄
+    █░░░░░█ █
+    ▀▄▄▄▄▄▀▀
+⠀
 """
     with open(caminho, "w", encoding="utf-8") as f:
         f.write(arte)
@@ -252,7 +259,7 @@ def main_menu_print():
     print("\033[1m |  \033[38;5;208m8 ➜\033[0m \033[1;36mFastFetch Options\033[0m                               |\033[0m"); menu_spacing()
     print("\033[1m |  \033[38;5;208m0 ➜\033[0m \033[1;31mQuit\033[0m                                            |\033[0m"); menu_spacing();   bar()
 def opc2_menu_print():
-    clear_console()
+    clear_console();
     print(f"\033[1;38;5;208m                 Configuration Menu...\033[0m"); bar()
     print("\033[1m |  \033[38;5;208m1 ➜\033[0m \033[1;36mNetwork Speedtest\033[0m                               |\033[0m"); menu_spacing()
     print("\033[1m |  \033[38;5;208m2 ➜\033[0m \033[1;36mRestart Wifi Network\033[0m                            |\033[0m"); menu_spacing()
@@ -321,7 +328,28 @@ def developer_menu():
     while True:
         opc = input("\033[38;5;208mOption: \033[0m")
         if opc == "1":
-            print("11111")
+            caminho = "/usr/share/cachyos-fish-config/cachyos-config.fish"
+            linha = """alias central="python $HOME/c.OS_PyManager/update.py"
+alias centralc="kate $HOME/c.OS_PyManager/update.py"
+alias update='sudo pacman -Syu && sudo pacman -Sc && sudo pacman -Rns (pacman -Qtdq) && sudo journalctl --vacuum-time=7d && sudo fstrim -av'
+alias audio='alsamixer'
+alias anime='ani-cli'
+alias reb='reboot'
+alias off='poweroff'
+alias config_fish="kate /usr/share/cachyos-fish-config/cachyos-config.fish"
+alias config_neofetch='kate ~/.config/neofetch/config.conf'
+alias config_fastfetch='kate ~/.config/fastfetch/config.jsonc'
+alias componentes="inxi -F"
+"""
+
+            with open(caminho, "r") as f:
+                linhas = [l.strip() for l in f.readlines()]
+            if linha not in linhas:
+                subprocess.run(
+                    ["sudo", "tee", "-a", caminho],
+                    input=linha + "\n",
+                    text=True
+                )
         else:
             print("Leaving")
             time.sleep(0.2);break
@@ -344,7 +372,6 @@ def all_done():
 def valid():
     print("  \033[31mSelect Valid Option...\033[0m");   time.sleep(0.5)
 #============================================= MAIN NAVIGATOR ====================================================================================
-
 def menu():
     cont1 = 0
     while cont1 == 0:
@@ -353,7 +380,6 @@ def menu():
             opc = int(input("    \033[1;38;5;208mOption: \033[0m"))
         except ValueError:
             valid();    continue
-
 #===> menu option 1
         if opc == 1:
             time_start = time.time();       clear_console()
@@ -388,7 +414,6 @@ def menu():
                 except ValueError:
                     valid()
                     continue
-
                 if opc == 1:
                     download_utilitaries();     all_done()
                 elif opc == 2:
@@ -444,15 +469,12 @@ def menu():
                     valid()
                     continue
                 home = os.path.expanduser("~")
-
                 if opc == 1:
                     fastfetch();        tungtung = input(":")
                 elif opc == 2:
                     configure_ascii();      all_done()
-
                 elif opc == 3:
                     create_new_ascii();     all_done()
-
                 elif opc == 4:
                     config_fastfetch = os.path.join(home, ".config/fastfetch/config.jsonc")
                     subprocess.run(["kate", config_fastfetch])
