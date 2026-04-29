@@ -171,8 +171,7 @@ include current-theme.conf
     with open(caminho, "w") as f:  # 🔥 "w" apaga tudo
         f.write(config)
 def open_kitty_conf():
-    caminho = os.path.expanduser("~/.config/kitty/kitty.conf")
-    subprocess.Popen(["kate", caminho])
+    os.system("xdg-open ~/.config/kitty/kitty.conf")
 
 #============================================= DEF'S OPTION 8 =================================================================#"
 
@@ -220,12 +219,8 @@ def create_fastfetch():
         }
     ]
 }"""
-
     with open(caminho_arquivo, "w", encoding="utf-8") as f:
         f.write(conteudo)
-
-def configure_ascii():
-    os.system("xdg-open ~/.config/fastfetch/ascii.txt")
 
 def create_new_ascii():
     caminho = os.path.expanduser("~/.config/fastfetch/ascii.txt")
@@ -240,6 +235,11 @@ def create_new_ascii():
 """
     with open(caminho, "w", encoding="utf-8") as f:
         f.write(arte)
+
+def open_ascii_config():
+    os.system("xdg-open ~/.config/fastfetch/ascii.txt")
+def open_fastfetch_config():
+    os.system("xdg-open ~/.config/fastfetch/config.jsonc")
 
 #============================================= Menu's Print's =================================================================#"
 
@@ -309,47 +309,10 @@ def developer_menu():
     print("\033[1;38;5;120m1 ==>\033[0m \033[1;38;5;120mDownload Utilitaries Packages\033[0m\n")
     print("\033[1;37m2 ==>\033[0m \033[1;37mDownload Gaming Packages\033[0m\n")
     print("\033[1;34m2 ==>\033[0m \033[1;34mDownload Gaming Packages\033[0m\n")
-    print("\033[1;31mVermelho\033[0m")
-    print("\033[1;32mVerde\033[0m")
-    print("\033[1;33mAmarelo\033[0m")
-    print("\033[1;34mAzul\033[0m")
-    print("\033[1;35mMagenta\033[0m")
-    print("\033[1;36mCiano (azul claro)\033[0m")
-    print("\033[1;37mBranco\033[0m")
-    print("\033[1;38;5;196mVermelho forte\033[0m")
-    print("\033[1;38;5;208mLaranja\033[0m")
-    print("\033[1;38;5;226mAmarelo vivo\033[0m")
-    print("\033[1;38;5;46mVerde neon\033[0m")
-    print("\033[1;38;5;120mVerde bebê\033[0m")
-    print("\033[1;38;5;39mAzul claro vivo\033[0m")
-    print("\033[1;38;5;27mAzul escuro forte\033[0m")
-    print("\033[1;38;5;93mRoxo claro\033[0m")
-    print("\033[1;38;5;201mRosa\033[0m")
     while True:
         opc = input("\033[38;5;208mOption: \033[0m")
         if opc == "1":
-            caminho = "/usr/share/cachyos-fish-config/cachyos-config.fish"
-            linha = """alias central="python $HOME/c.OS_PyManager/update.py"
-alias centralc="kate $HOME/c.OS_PyManager/update.py"
-alias update='sudo pacman -Syu && sudo pacman -Sc && sudo pacman -Rns (pacman -Qtdq) && sudo journalctl --vacuum-time=7d && sudo fstrim -av'
-alias audio='alsamixer'
-alias anime='ani-cli'
-alias reb='reboot'
-alias off='poweroff'
-alias config_fish="kate /usr/share/cachyos-fish-config/cachyos-config.fish"
-alias config_neofetch='kate ~/.config/neofetch/config.conf'
-alias config_fastfetch='kate ~/.config/fastfetch/config.jsonc'
-alias componentes="inxi -F"
-"""
-
-            with open(caminho, "r") as f:
-                linhas = [l.strip() for l in f.readlines()]
-            if linha not in linhas:
-                subprocess.run(
-                    ["sudo", "tee", "-a", caminho],
-                    input=linha + "\n",
-                    text=True
-                )
+            print("1")
         else:
             print("Leaving")
             time.sleep(0.2);break
@@ -472,12 +435,11 @@ def menu():
                 if opc == 1:
                     fastfetch();        tungtung = input(":")
                 elif opc == 2:
-                    configure_ascii();      all_done()
+                    open_ascii_config();      all_done()
                 elif opc == 3:
                     create_new_ascii();     all_done()
                 elif opc == 4:
-                    config_fastfetch = os.path.join(home, ".config/fastfetch/config.jsonc")
-                    subprocess.run(["kate", config_fastfetch])
+                    open_fastfetch_config();    all_done()
                 elif opc == 5:
                     create_fastfetch();     all_done()
                 else:
