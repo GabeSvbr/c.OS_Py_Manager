@@ -125,27 +125,30 @@ def run_ani_cli():
         print("\033[1;32mReturning...\033[0m");time.sleep(1)
 #============================================= DEF'S OTION 7 =================================================================#"
 def update_config_fish():
-            caminho = "/usr/share/cachyos-fish-config/cachyos-config.fish"
-            linha = """alias central="python $HOME/c.OS_PyManager/update.py"
-alias centralc="kate $HOME/c.OS_PyManager/update.py"
-alias update='sudo pacman -Syu && sudo pacman -Sc && sudo pacman -Rns (pacman -Qtdq) && sudo journalctl --vacuum-time=7d && sudo fstrim -av'
-alias audio='alsamixer'
-alias anime='ani-cli'
-alias reb='reboot'
-alias off='poweroff'
-alias config_fish="kate /usr/share/cachyos-fish-config/cachyos-config.fish"
-alias config_neofetch='kate ~/.config/neofetch/config.conf'
-alias config_fastfetch='kate ~/.config/fastfetch/config.jsonc'
-alias componentes="inxi -F"
-"""
-            with open(caminho, "r") as f:
-                linhas = [l.strip() for l in f.readlines()]
-            if linha not in linhas:
-                subprocess.run(
-                    ["sudo", "tee", "-a", caminho],
-                    input=linha + "\n",
-                    text=True
-                )
+    caminho = "/usr/share/cachyos-fish-config/cachyos-config.fish"
+    aliases = [
+        'alias central="python $HOME/update.py"',
+        'alias centralc="kate $HOME/update.py"',
+        "alias update='sudo pacman -Syu && sudo pacman -Sc && sudo pacman -Rns (pacman -Qtdq) && sudo journalctl --vacuum-time=7d && sudo fstrim -av'",
+        "alias audio='alsamixer'",
+        "alias anime='ani-cli'",
+        "alias reb='reboot'",
+        "alias off='poweroff'",
+        'alias config_fish="kate /usr/share/cachyos-fish-config/cachyos-config.fish"',
+        "alias config_neofetch='kate ~/.config/neofetch/config.conf'",
+        "alias config_fastfetch='kate ~/.config/fastfetch/config.jsonc'",
+        'alias componentes="inxi -F"',
+    ]
+    with open(caminho, "r") as f:
+        conteudo = f.read()
+
+    for alias in aliases:
+        if alias not in conteudo:
+            subprocess.run(
+                ["sudo", "tee", "-a", caminho],
+                input=alias + "\n",
+                text=True
+            )
 
 def configure_kitty(destino=None):
     caminho = os.path.expanduser("~/.config/kitty/kitty.conf")
