@@ -57,10 +57,10 @@ def download_gaming():
         print("Error")
 def download_worktools():
     comando = '''
-    sudo pacman -S --needed yay python nmap wget python-pip krita neofetch obs-studio vim vesktop pycharm-community-edition virtualbox virtualbox-host-modules-arch &&
+    sudo pacman -S --needed yay python nmap wget python-pip krita neofetch obs-studio vim vesktop pycharm-community-edition virtualbox virtualbox-host-modules-arch code &&
     yay -S --needed google-earth-pro &&
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo &&
-    flatpak install -y flathub com.visualstudio.code  it.mijorus.gearlever com.github.tchx84.Flatseal
+    flatpak install -y flathub it.mijorus.gearlever com.github.tchx84.Flatseal
     '''
 
     try:
@@ -76,9 +76,9 @@ def show_packages():
     print("\n=== GAMING ===")
     print("pacman: steam, mangohud, gamemode, prismlauncher")
     print("\n=== WORKTOOLS ===")
-    print("pacman: yay, python, wget, python-pip, nmap, krita, neofetch, obs-studio, vim, vesktop, pycharm-community-edition, virtualbox, virtualbox-host-modules-arch")
+    print("pacman: vscode, yay, python, wget, python-pip, nmap, krita, neofetch, obs-studio, vim, vesktop, pycharm-community-edition, virtualbox, virtualbox-host-modules-arch")
     print("yay: google-earth-pro")
-    print("flatpak: com.visualstudio.code, it.mijorus.gearlever, com.github.tchx84.Flatseal")
+    print("flatpak:it.mijorus.gearlever, com.github.tchx84.Flatseal")
 
 #============================================= DEF'S OPTION 4 =================================================================#"
 def list_components():
@@ -125,30 +125,27 @@ def run_ani_cli():
         print("\033[1;32mReturning...\033[0m");time.sleep(1)
 #============================================= DEF'S OTION 7 =================================================================#"
 def update_config_fish():
-    caminho = "/usr/share/cachyos-fish-config/cachyos-config.fish"
-    aliases = [
-        'alias central="python $HOME/update.py"',
-        'alias centralc="kate $HOME/update.py"',
-        "alias update='sudo pacman -Syu && sudo pacman -Sc && sudo pacman -Rns (pacman -Qtdq) && sudo journalctl --vacuum-time=7d && sudo fstrim -av'",
-        "alias audio='alsamixer'",
-        "alias anime='ani-cli'",
-        "alias reb='reboot'",
-        "alias off='poweroff'",
-        'alias config_fish="kate /usr/share/cachyos-fish-config/cachyos-config.fish"',
-        "alias config_neofetch='kate ~/.config/neofetch/config.conf'",
-        "alias config_fastfetch='kate ~/.config/fastfetch/config.jsonc'",
-        'alias componentes="inxi -F"',
-    ]
-    with open(caminho, "r") as f:
-        conteudo = f.read()
-
-    for alias in aliases:
-        if alias not in conteudo:
-            subprocess.run(
-                ["sudo", "tee", "-a", caminho],
-                input=alias + "\n",
-                text=True
-            )
+            caminho = "/usr/share/cachyos-fish-config/cachyos-config.fish"
+            linha = """alias central="python $HOME/c.OS_PyManager/update.py"
+alias centralc="kate $HOME/c.OS_PyManager/update.py"
+alias update='sudo pacman -Syu && sudo pacman -Sc && sudo pacman -Rns (pacman -Qtdq) && sudo journalctl --vacuum-time=7d && sudo fstrim -av'
+alias audio='alsamixer'
+alias anime='ani-cli'
+alias reb='reboot'
+alias off='poweroff'
+alias config_fish="kate /usr/share/cachyos-fish-config/cachyos-config.fish"
+alias config_neofetch='kate ~/.config/neofetch/config.conf'
+alias config_fastfetch='kate ~/.config/fastfetch/config.jsonc'
+alias componentes="inxi -F"
+"""
+            with open(caminho, "r") as f:
+                linhas = [l.strip() for l in f.readlines()]
+            if linha not in linhas:
+                subprocess.run(
+                    ["sudo", "tee", "-a", caminho],
+                    input=linha + "\n",
+                    text=True
+                )
 
 def configure_kitty(destino=None):
     caminho = os.path.expanduser("~/.config/kitty/kitty.conf")
