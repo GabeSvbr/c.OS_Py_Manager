@@ -90,7 +90,7 @@ def power_menu():
     while True:
         opc5_menu_print()
         try:
-            opc = int(input("    \033[1;38;5;208mOption: \033[0m")or 0)
+            opc = get_option()
         except ValueError:
             valid();        continue
         if opc == 1:
@@ -334,13 +334,16 @@ def all_done():
     print("\033[32mAll Done!\033[0m");         time.sleep(1)
 def valid():
     print("  \033[31mSelect Valid Option...\033[0m");   time.sleep(0.5)
+def get_option():
+    val = int(input("    \033[1;38;5;208mOption: \033[0m")or 0)
+    return val
 #============================================= MAIN NAVIGATOR ====================================================================================
 def menu():
     cont1 = 0
     while cont1 == 0:
         main_menu_print()
         try:
-            opc = int(input("    \033[1;38;5;208mOption: \033[0m"))
+            opc = get_option()
         except ValueError:
             valid();    continue
 #===> menu option 1
@@ -355,7 +358,7 @@ def menu():
             while True:
                 opc2_menu_print()
                 try:
-                    opc = int(input("    \033[1;38;5;208mOption: \033[0m")or 0)
+                    opc = get_option()
                 except ValueError:
                     valid()
                     continue
@@ -373,7 +376,7 @@ def menu():
             while True:
                 opc3_menu_print()
                 try:
-                    opc = int(input("    \033[1;38;5;208mOption: \033[0m")or 0)
+                    opc = get_option()
                 except ValueError:
                     valid()
                     continue
@@ -402,7 +405,7 @@ def menu():
             while True:
                 opc7_menu_print();
                 try:
-                    opc = int(input("    \033[1;38;5;208mOption: \033[0m")or 0)
+                    opc = get_option()
                 except ValueError:
                     valid()
                     continue
@@ -427,7 +430,7 @@ def menu():
              while True:
                 opc8_menu_print();
                 try:
-                    opc = int(input("    \033[1;38;5;208mOption: \033[0m")or 0)
+                    opc = get_option()
                 except ValueError:
                     valid()
                     continue
