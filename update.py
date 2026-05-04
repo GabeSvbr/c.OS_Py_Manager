@@ -47,7 +47,7 @@ def download_utilitaries():
         print("Error Durring Instalation.")
 def download_gaming():
     comando = '''
-    sudo pacman -S --needed steam mangohud gamemode prismlauncher protonup-qt
+    sudo pacman -S --needed steam mangohud gamemode prismlauncher protonup-qt plasma-x11-session kwin-x11
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo &&
     flatpak install -y flathub com.protonvpn.www
     '''
@@ -74,7 +74,7 @@ def show_packages():
     print("yay: shortwave")
     print("flatpak: Cohesion, localsend, Brave.Browser, ytmdesktop, MissionCenter, Bazaar, Impression")
     print("\n=== GAMING ===")
-    print("pacman: steam, mangohud, gamemode, prismlauncher")
+    print("pacman: steam, mangohud, gamemode, prismlauncher, plasma-x11-session, kwin-x11")
     print("\n=== WORKTOOLS ===")
     print("pacman: vscode, yay, python, wget, python-pip, nmap, krita, neofetch, obs-studio, vim, vesktop, pycharm-community-edition, virtualbox, virtualbox-host-modules-arch")
     print("yay: google-earth-pro")
