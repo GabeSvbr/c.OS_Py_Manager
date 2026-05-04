@@ -126,8 +126,8 @@ def run_ani_cli():
 #============================================= DEF'S OTION 7 =================================================================#"
 def update_config_fish():
             caminho = "/usr/share/cachyos-fish-config/cachyos-config.fish"
-            linha = """alias central="python $HOME/c.OS_PyManager/update.py"
-alias centralc="kate $HOME/c.OS_PyManager/update.py"
+            linha = """alias central="python $HOME/update.py"
+alias centralc="kate $HOME/update.py"
 alias update='sudo pacman -Syu && sudo pacman -Sc && sudo pacman -Rns (pacman -Qtdq) && sudo journalctl --vacuum-time=7d && sudo fstrim -av'
 alias audio='alsamixer'
 alias anime='ani-cli'
